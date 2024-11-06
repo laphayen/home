@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.ssafy.edu.interest.model.repository.RegionMapper">
+	<select id="getProvinceName" parameterType="String">
+		SELECT sido_name as
+		sido from dongcodes
+		where dong_code=#{provinceCode}
+	</select>
+	<select id="getCityName" parameterType="String">
+		SELECT gugun_name as
+		gugun
+		from dongcodes
+		where dong_code= #{provinceCode}
+	</select>
+	<select id="getDongName">
+		SELECT dong_name as
+		dong
+		from dongcodes
+		where dong_code=
+		#{provinceCode}
+	</select>
+</mapper>

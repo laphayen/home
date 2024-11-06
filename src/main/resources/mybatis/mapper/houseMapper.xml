@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--차후 수정해야함 -->
+<mapper
+	namespace="com.ssafy.edu.house.model.repository.HouseMapper">
+	<select id="getHouseDeals" parameterType="map"
+		resultType="com.ssafy.edu.house.model.HouseDealsDto">
+		SELECT 
+		i.dong_name as dongName,
+		i.apt_nm as aptNm,		
+		exclu_use_ar as excluUseAr,floor,deal_amount as dealAmount
+		FROM houseDeals d inner join houseinfos i
+		using (apt_seq)	
+		WHERE 
+		deal_year=#{year}
+		and
+		deal_month=#{month}
+		limit 10
+	</select>
+	<select id="getHouseInfos" parameterType="map"
+		resultType="com.ssafy.edu.house.model.HouseInfosDto">
+		SELECT * from houseinfos
+		where sgg_cd=#{sgg_cd} and
+		umd_cd=#{umd_cd}
+		limit 10
+	</select>
+</mapper>

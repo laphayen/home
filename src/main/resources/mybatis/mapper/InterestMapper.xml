@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.ssafy.edu.interest.model.repository.InterestMapper">
+	<insert id="addInterest"
+		parameterType="com.ssafy.edu.interest.model.InterestDto" >INSERT INTO interest
+		(interest_id,
+		interest_sido_name,
+		interest_gugun_name,
+		interest_dong_name) VALUES
+		(#{interestId},
+		#{interestSidoName},
+		#{interestGugunName}, #{interestDongName})
+	</insert>
+	<select id="listInterest" parameterType="String"
+		resultType="com.ssafy.edu.interest.model.InterestDto">
+		SELECT
+		interest_id AS interestID,
+		interest_sido_name AS
+		interestSidoName,
+		interest_gugun_name AS interestGugunName,
+		interest_dong_name AS interestDongName
+		FROM
+		interest
+	</select>
+	<delete id="deleteInterest">
+		DELETE FROM interest WHERE interest_id = #{id}
+	</delete>
+	<select id="getLastInterestId">
+		SELECT ifnull(MAX(CAST(interest_id AS UNSIGNED)),0) AS last_id
+		FROM interest
+	</select>
+</mapper>	

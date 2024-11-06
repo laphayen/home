@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper
+    namespace="com.ssafy.edu.board.model.repository.BoardMapper">
+
+    <insert id="writeArticle">
+        INSERT INTO board (user_id, subject, content)
+        VALUES (#{userId}, #{subject}, #{content})
+    </insert>
+
+    <select id="listArticle" parameterType="map"
+        resultType="com.ssafy.edu.board.BoardDto">
+        SELECT
+            article_no as articleNo,
+            user_id as userId,
+            subject as subject,
+            content as content,
+            hit as hit,
+            register_time as registerTime
+        FROM board
+        <where>
+            <if test="key != null and key != '' and word != null and word != ''">
+                <choose>
+                    <when test="key == 'article_no'">
+                        AND article_no = #{word}
+                    </when>
+                    <when test="key == 'subject'">
+                        AND subject LIKE CONCAT('%', #{word}, '%')
+                    </when>
+                    <when test="key == 'user_id'">
+                        AND user_id = #{word}
+                    </when>
+                </choose>
+            </if>
+        </where>
+        ORDER BY article_no DESC
+        LIMIT ${start}, ${sizePerPage} <!-- 수정된 부분 -->
+    </select>
+
+    <select id="getTotalCount" parameterType="map" resultType="int">
+        SELECT COUNT(*) FROM board
+        <where>
+            <if test="key != null and key != '' and word != null and word != ''">
+                <choose>
+                    <when test="key == 'article_no'">
+                        AND article_no = #{word}
+                    </when>
+                    <when test="key == 'subject'">
+                        AND subject LIKE CONCAT('%', #{word}, '%')
+                    </when>
+                    <when test="key == 'user_id'">
+                        AND user_id = #{word}
+                    </when>
+                </choose>
+            </if>
+        </where>
+    </select>
+
+    <select id="getArticle" parameterType="int"
+        resultType="com.ssafy.edu.board.BoardDto">
+        SELECT article_no as articleNo, user_id as userId, subject as subject,
+        content as content, hit as hit, register_time as registerTime FROM
+        board WHERE article_no = #{articleNo}
+    </select>
+
+    <update id="updateHit" parameterType="int">
+        UPDATE board SET hit = hit + 1 WHERE article_no = #{articleNo}
+    </update>
+
+    <update id="modifyArticle">
+        UPDATE board
+        SET subject = #{subject}, content = #{content}
+        WHERE article_no = #{articleNo}
+    </update>
+
+    <delete id="deleteArticle" parameterType="int">
+        DELETE FROM board WHERE article_no = #{articleNo}
+    </delete>
+
+</mapper>

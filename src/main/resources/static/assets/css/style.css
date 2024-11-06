@@ -1,0 +1,166 @@
+html, body {
+	height: 100%;
+	margin: 0;
+	overflow: hidden;
+}
+
+#map {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 1;
+}
+
+#sidebar {
+	position: absolute;
+	left: 20px;
+	top: 20px;
+	bottom: 20px;
+	width: 450px; /* Increase sidebar width */
+	background-color: rgba(255, 255, 255, 0.8);
+	color: black;
+	padding: 15px;
+	z-index: 2;
+	border-radius: 8px;
+	overflow-y: auto;
+}
+
+.tab-content {
+	margin-top: 20px;
+}
+
+#search-results, #selection-results {
+	max-height: 300px;
+	overflow-y: auto;
+	margin-top: 20px;
+}
+
+#selection-results .table {
+	font-size: 12px;
+}
+
+#selection-results .table th:nth-child(1), #selection-results .table td:nth-child(1)
+	{
+	width: 200px;
+}
+
+#selection-results .table th:nth-child(2), #selection-results .table td:nth-child(2)
+	{
+	width: 70px;
+}
+
+#selection-results .table th:nth-child(3), #selection-results .table td:nth-child(3)
+	{
+	width: 70px;
+}
+
+#selection-results .table th:nth-child(4), #selection-results .table td:nth-child(4)
+	{
+	width: 100px; /* Increase width for 법정동 */
+}
+
+#selection-results .table th:nth-child(5), #selection-results .table td:nth-child(5)
+	{
+	width: 200px; /* Increase width for 거래금액 */
+}
+
+#top-right-buttons {
+	position: absolute;
+	top: 20px;
+	right: 20px;
+	z-index: 3;
+	display: flex;
+}
+
+.btn-custom {
+	background-color: rgba(0, 123, 255, 0.9);
+	color: white;
+	margin-left: 10px;
+}
+
+.btn-custom:first-child {
+	margin-left: 0;
+}
+
+.btn-custom.info-btn {
+	background-color: yellow;
+	color: black;
+}
+
+#profile-btn {
+	background-color: #6c757d;
+	color: white;
+	margin-right: 10px;
+	margin-left: 10px;
+}
+
+#signup-btn {
+	background-color: #28a745;
+	color: white;
+}
+
+#logout-btn {
+	background-color: #dc3545;
+	color: white;
+}
+
+#signup-info-btn {
+	background-color: #e0e0e0; /* Slightly darker than white */
+	color: black;
+	margin-left: 10px;
+}
+
+#search-form, #selection-form {
+	display: flex;
+	flex-direction: column;
+}
+
+#search-input {
+	flex: 1;
+	margin-bottom: 10px;
+}
+
+.form-group {
+	margin-bottom: 10px;
+}
+
+#header_nav_confirm_on {
+	display: none;
+}
+
+.btn-find-password {
+	background-color: #28a745;
+	color: white;
+	margin-right: 10px;
+}
+
+.modal-footer {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.modal-footer .btn-danger {
+	margin-left: 10px;
+}
+
+#bottom-right-buttons {
+	position: absolute;
+	bottom: 20px;
+	right: 20px;
+	z-index: 3;
+	display: flex;
+	flex-direction: row; /* 한 줄에 배치되도록 수정 */
+}
+
+#bottom-right-buttons .hospital-btn {
+	background-color: #14d04a; /* 민트색 */
+	color: white;
+	margin-right: 10px; /* 버튼 사이에 간격 추가 */
+}
+
+#bottom-right-buttons .subway-btn {
+	background-color: #6f42c1; /* 보라색 */
+	color: white;
+}

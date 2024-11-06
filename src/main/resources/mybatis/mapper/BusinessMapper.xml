@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.ssafy.edu.business.model.repository.BusinessMapper">
+	<insert id="addBusiness"
+		parameterType="com.ssafy.edu.business.model.BusinessDto">
+		insert into
+		local_business(name, industry_name,
+		industry_specific_name, sido_code,
+		gungu_code, dong_code, address)
+		values(#{name},#{industry_name},#{industry_specific_name},#{sido_code},#{gungu_code},#{dong_code},#{address})
+	</insert>
+	<delete id="removeBusiness">delete from local_business where id = #{id}</delete>
+	<select id="getLocalBusinesses">
+		select * from local_business where dong_code like
+		#{dongCode}
+	</select>
+	<select id="getLocalBusinessesByIndustrySpecificName">
+		select * from local_business where
+		industry_specific_name =
+		#{industySpecificName} and
+		dong_code
+		=
+		#{dongCode}
+	</select>
+	<select id="getIndustrySpecificNameByDongCode">
+		select distinct industry_specific_name from
+		local_business where dong_code = #{dongCode}
+	</select>
+	<select id="getDongcodeByDongName" parameterType="string">
+		select * from dongcodes where dong_name = #{dongName}
+	</select>
+</mapper>
