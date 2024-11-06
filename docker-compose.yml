@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  # MySQL 서비스 설정
+  mysql-db:
+    image: mysql:8.0
+    container_name: mysql-db
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password    # 루트 비밀번호 설정
+      MYSQL_DATABASE: ssafyhome             # 데이터베이스 이름
+      MYSQL_USER: ssafy                     # 사용자 이름
+      MYSQL_PASSWORD: ssafy_password        # 사용자 비밀번호
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - ssafyhome-network
+
+  # Spring Boot 애플리케이션 설정
+  springboot-app:
+    image: ssafyhome
+    container_name: springboot-app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-db:3306/ssafyhome
+      SPRING_DATASOURCE_USERNAME: ssafy
+      SPRING_DATASOURCE_PASSWORD: ssafy_password
+    depends_on:
+      - mysql-db
+    networks:
+      - ssafyhome-network
+
+# 네트워크 설정
+networks:
+  ssafyhome-network:
+
+# 데이터 지속성을 위한 볼륨 설정
+volumes:
+  mysql_data:
